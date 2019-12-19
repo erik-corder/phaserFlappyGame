@@ -112,7 +112,7 @@ class Example1 extends Phaser.Scene {
         }
 
 
-        if (this.timer / 100 % 1 == 0 && this.timer != 0) {
+        if (this.timer / 200 % 1 == 0 && this.timer != 0) {
 
             var randyX = this.randy(100, 150);
             //pipNorth
