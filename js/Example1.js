@@ -94,13 +94,13 @@ class Example1 extends Phaser.Scene {
         
 
         for (var i = 0; i <= this.pipeNorth.length; i++) {
-            this.pipeNorth[this.i].x -= 1.5;
+            this.pipeNorth[this.i].x -= 1;
             this.pipNorthCollesion = this.physics.collide(this.bird, this.pipeNorth[this.i], this.collision1, null, this);
             this.pipeNorth[this.i].setImmovable();
         }
 
         for (var i = 0; i <= this.pipeSouth.length; i++) {
-            this.pipeSouth[this.i].x -= 1.5;
+            this.pipeSouth[this.i].x -= 1;
             this.pipSourthCollesion = this.physics.collide(this.bird, this.pipeSouth[this.i], this.collision2, null, this);
             this.pipeSouth[this.i].setImmovable();
         }
