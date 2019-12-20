@@ -18,6 +18,7 @@ class Example1 extends Phaser.Scene {
         this.i = 0;
         this.score = 0;
         this.BestScore = 0;
+        this.currentScore = 0;
     }
 
     preload() {
