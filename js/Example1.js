@@ -19,6 +19,7 @@ class Example1 extends Phaser.Scene {
         this.score = 0;
         this.BestScore = 0;
         this.currentScore = 0;
+
     }
 
     preload() {
@@ -109,9 +110,9 @@ class Example1 extends Phaser.Scene {
             this.currentScore = localStorage.getItem("BestScore");
 
             if (this.score > this.currentScore)
-                localStorage.setItem("BestScore" , this.score);
-            
-            this.BestScore = this.add.text(137, 185, "Best : " + this.  currentScore, { font: "15px Impact", color: "#7d765b" });
+                localStorage.setItem("BestScore", this.score);
+
+            this.BestScore = this.add.text(137, 185, "Best : " + this.currentScore, { font: "15px Impact", color: "#7d765b" });
         }
 
 
