@@ -17,6 +17,7 @@ class Example1 extends Phaser.Scene {
         this.timer = 0;
         this.i = 0;
         this.score = 0;
+        this.MaxScore = 0;
     }
 
     preload() {
@@ -25,9 +26,11 @@ class Example1 extends Phaser.Scene {
         this.load.image('land', 'assets/images/fg.png');
         this.load.image('pipNorth', 'assets/images/pipeNorth.png');
         this.load.image('pipSouth', 'assets/images/pipeSouth.png');
-        this.load.image('gameOver', 'assets/images/game_over.jpg');
+        //this.load.image('gameOver', 'assets/images/game_over.jpg');
         this.load.audio('flySound', 'assets/audio/sfx_flap.wav');
         this.load.audio('hitPip', 'assets/audio/sfx_hit.wav');
+        this.load.image('gameOver', 'assets/images/gearmovar.jpg');
+        this.load.image('scoreBord', 'assets/images/scoreboard.png');
     }
 
     randy(x, y) {
@@ -36,6 +39,7 @@ class Example1 extends Phaser.Scene {
 
     create() {
         this.image = this.add.image(120, 160, 'background');
+
 
         //brid
         this.bird = this.physics.add.sprite(this.sys.game.config.width / 5, this.sys.game.config.height / 2, "bird");
@@ -56,6 +60,7 @@ class Example1 extends Phaser.Scene {
 
         //score
         this.scoreText = this.add.text(16, 20, "Score: 0", { font: "15px Impact", color: "black" });
+        console.log(localStorage.getItem("BestScore"))
 
         this.key_ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
@@ -85,13 +90,29 @@ class Example1 extends Phaser.Scene {
 
 
         if (this.pipNorthCollesion == true || this.pipSourthCollesion == true) {
-            this.image = this.add.image(120, 160, 'gameOver');
+
+            //game over image
+            this.image = this.add.image(120, 110, 'gameOver');
+            this.image.displayWidth = 100;
+            this.image.displayHeight = 25;
+
+            //score bord image
+            this.scoreBord = this.add.image(120, 170, 'scoreBord');
+            this.scoreBord.displayWidth = 150;
+            this.scoreBord.displayHeight = 75;
+
             this.scene.pause();
-            
+
             //score
-            this.finalScore = this.add.text(75, 170, "Your Score: "+this.score, { font: "15px Impact", color: "black" });
+            this.finalScore = this.add.text(137, 160, "Score: " + this.score, { font: "15px Impact", color: "#7d765b" });
+            this.currentScore = localStorage.getItem("BestScore");
+
+            if (this.score > this.currentScore)
+                localStorage.setItem("BestScore", this.score);
+            
+            this.BestScore = this.add.text(137, 185, "Best : " + this.  currentScore, { font: "15px Impact", color: "#7d765b" });
         }
-        
+
 
         for (var i = 0; i <= this.pipeNorth.length; i++) {
             this.pipeNorth[this.i].x -= 1;
@@ -112,7 +133,7 @@ class Example1 extends Phaser.Scene {
         }
 
 
-        if (this.timer / 200 % 1 == 0 &&  this.timer != 0) {
+        if (this.timer / 200 % 1 == 0 && this.timer != 0) {
 
             var randyX = this.randy(100, 150);
             //pipNorth
