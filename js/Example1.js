@@ -34,9 +34,9 @@ class Example1 extends Phaser.Scene {
         this.load.image('gameOver', 'assets/images/gearmovar.jpg');
         this.load.image('scoreBord', 'assets/images/scoreboard.png');
         this.load.image('goldMedale', 'assets/images/gold.png');
-        this.load.image('bronzeMedale', 'assets/images/bronze.png');
-        this.load.image('silverMedale', 'assets/images/silver.png');
-    }
+        this.load.image('silverMedale', 'assets/images/bronzes.png');
+        this.load.image('bronzeMedale', 'assets/images/silver.png');
+    }bronzeMedale
 
     randy(x, y) {
         return Phaser.Math.Between(x, y);
