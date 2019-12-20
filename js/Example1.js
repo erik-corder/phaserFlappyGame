@@ -33,6 +33,9 @@ class Example1 extends Phaser.Scene {
         this.load.audio('hitPip', 'assets/audio/sfx_hit.wav');
         this.load.image('gameOver', 'assets/images/gearmovar.jpg');
         this.load.image('scoreBord', 'assets/images/scoreboard.png');
+        this.load.image('goldMedale', 'assets/images/gold.png');
+        this.load.image('bronzeMedale', 'assets/images/bronze.png');
+        this.load.image('silverMedale', 'assets/images/silver.png');
     }
 
     randy(x, y) {
@@ -109,10 +112,27 @@ class Example1 extends Phaser.Scene {
             this.finalScore = this.add.text(137, 160, "Score: " + this.score, { font: "15px Impact", color: "#7d765b" });
             this.currentScore = localStorage.getItem("BestScore");
 
-            if (this.score > this.currentScore)
-                localStorage.setItem("BestScore", this.score);
-
             this.BestScore = this.add.text(137, 185, "Best : " + this.currentScore, { font: "15px Impact", color: "#7d765b" });
+
+            if (this.score > this.currentScore) {
+                localStorage.setItem("BestScore", this.score);
+                this.BestScore.setText("Best : " + this.score);
+            }
+
+            if (this.currentScore >= 0 && this.currentScore <=5) {
+                this.bronzeMedale = this.add.image(80, 175, 'bronzeMedale');
+                this.bronzeMedale.displayWidth = 30;
+                this.bronzeMedale.displayHeight = 30;
+            }else if(this.currentScore >5  && this.currentScore <=10){
+                this.silverMedale = this.add.image(80, 175, 'silverMedale');
+                this.silverMedale.displayWidth = 30;
+                this.silverMedale.displayHeight = 30;
+            }else if(this.currentScore >10 ){
+                this.goldMedale = this.add.image(80, 175, 'goldMedale');
+                this.goldMedale.displayWidth = 30;
+                this.goldMedale.displayHeight = 30;
+            }
+
         }
 
 
