@@ -119,20 +119,19 @@ class Example1 extends Phaser.Scene {
                 this.BestScore.setText("Best : " + this.score);
             }
 
-            if (this.currentScore >= 0 && this.currentScore <=5) {
+            if (this.score >= 0 && this.score <=5) {
                 this.bronzeMedale = this.add.image(80, 175, 'bronzeMedale');
                 this.bronzeMedale.displayWidth = 30;
                 this.bronzeMedale.displayHeight = 30;
-            }else if(this.currentScore >5  && this.currentScore <=10){
+            }else if(this.score >5  && this.score <=10){
                 this.silverMedale = this.add.image(80, 175, 'silverMedale');
                 this.silverMedale.displayWidth = 30;
                 this.silverMedale.displayHeight = 30;
-            }else if(this.currentScore >10 ){
+            }else if(this.score >10 ){
                 this.goldMedale = this.add.image(80, 175, 'goldMedale');
                 this.goldMedale.displayWidth = 30;
                 this.goldMedale.displayHeight = 30;
             }
-
         }
 
 
