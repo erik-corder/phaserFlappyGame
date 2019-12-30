@@ -5,6 +5,7 @@ class Example2 extends Phaser.Scene {
 
     create() {
         this.key_ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        console.log("Example2");
     }
 
     update(){

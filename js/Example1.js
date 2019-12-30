@@ -28,7 +28,6 @@ class Example1 extends Phaser.Scene {
         this.load.image('land', 'assets/images/fg.png');
         this.load.image('pipNorth', 'assets/images/pipeNorth.png');
         this.load.image('pipSouth', 'assets/images/pipeSouth.png');
-        //this.load.image('gameOver', 'assets/images/game_over.jpg');
         this.load.audio('flySound', 'assets/audio/sfx_flap.wav');
         this.load.audio('hitPip', 'assets/audio/sfx_hit.wav');
         this.load.image('gameOver', 'assets/images/gearmovar.jpg');
@@ -50,6 +49,7 @@ class Example1 extends Phaser.Scene {
         this.bird = this.physics.add.sprite(this.sys.game.config.width / 5, this.sys.game.config.height / 2, "bird");
         this.bird.setGravityY(100);
         this.bird.setBounceY(.2);
+        this.bird.angle += 30;
 
         this.pipeNorth[this.i] = this.physics.add.sprite(240, this.randy(10, 50), "pipNorth");
         this.pipeNorth[this.i].displayWidth = this.pip.width;
@@ -65,12 +65,16 @@ class Example1 extends Phaser.Scene {
 
         //score
         this.scoreText = this.add.text(16, 20, "Score: 0", { font: "15px Impact", color: "black" });
-        console.log(localStorage.getItem("BestScore"))
+        
 
         this.key_ENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         //collider
         this.physics.add.collider(this.bird, this.land);
+
+        this.input.keyboard.on('keyup_ONE',function(event){
+            this.scene.resume();
+         },this);
 
     }
 
@@ -132,6 +136,7 @@ class Example1 extends Phaser.Scene {
                 this.goldMedale.displayWidth = 30;
                 this.goldMedale.displayHeight = 30;
             }
+            this.scene.launch('Example2');
         }
 
 
@@ -149,10 +154,10 @@ class Example1 extends Phaser.Scene {
 
         if (this.key_ENTER.isDown) {
             this.bird.setVelocityY(-100);
+            this.bird.angle = -20;
             var fly = this.sound.add('flySound');
             fly.play();
         }
-
 
         if (this.timer / 200 % 1 == 0 && this.timer != 0) {
 
@@ -167,7 +172,7 @@ class Example1 extends Phaser.Scene {
         }
 
         if (this.timer / 100 % 1 == 0) {
-            console.log(this.score);
+
             this.score++;
             this.scoreText.setText("Score: " + this.score);
         }
