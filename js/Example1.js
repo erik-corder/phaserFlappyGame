@@ -1,6 +1,6 @@
 class Example1 extends Phaser.Scene {
     constructor() {
-        super({ key: "Example1", active: true });
+        super({ key: "Example1" });
         //pipe gap
         this.pip = {
             pipGap: 85,
@@ -24,7 +24,7 @@ class Example1 extends Phaser.Scene {
 
     preload() {
         this.load.image('background', 'assets/images/bg.png');
-        this.load.image('bird', 'assets/images/flappy-bird-20.png');
+        //this.load.image('bird', 'assets/images/flappy-bird-20.png');
         this.load.image('land', 'assets/images/fg.png');
         this.load.image('pipNorth', 'assets/images/pipeNorth.png');
         this.load.image('pipSouth', 'assets/images/pipeSouth.png');
@@ -35,6 +35,9 @@ class Example1 extends Phaser.Scene {
         this.load.image('goldMedale', 'assets/images/gold.png');
         this.load.image('silverMedale', 'assets/images/bronzes.png');
         this.load.image('bronzeMedale', 'assets/images/silver.png');
+
+        this.load.image('bird1', 'assets/bird/bird1.png');
+        this.load.image('bird2', 'assets/bird/bird2.png');
     } bronzeMedale
 
     randy(x, y) {
@@ -44,12 +47,25 @@ class Example1 extends Phaser.Scene {
     create() {
         this.image = this.add.image(120, 160, 'background');
 
+        this.anims.create({
+            key: 'bird',
+            frames: [
+                { key: 'bird1' },
+                { key: 'bird2' },
+            ],
+            frameRate: 5,
+            repeat: 1000,
+            //hideOnComplete: true
+        });
+
+
 
         //brid
-        this.bird = this.physics.add.sprite(this.sys.game.config.width / 5, this.sys.game.config.height / 2, "bird");
+        // this.bird = this.physics.add.sprite(this.sys.game.config.width / 5, this.sys.game.config.height / 2, "bird2");
+        this.bird = this.physics.add.sprite(this.sys.game.config.width / 5, this.sys.game.config.height / 2, 'bird1').play('bird');
         this.bird.setGravityY(100);
         this.bird.setBounceY(.2);
-        this.bird.angle += 30;
+        // this.bird.angle += 30;
 
         this.pipeNorth[this.i] = this.physics.add.sprite(240, this.randy(10, 50), "pipNorth");
         this.pipeNorth[this.i].displayWidth = this.pip.width;
